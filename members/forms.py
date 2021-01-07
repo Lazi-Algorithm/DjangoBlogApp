@@ -1,6 +1,23 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django import forms
+from theblog.models import Profile
+
+class ProfilePageForm(forms.ModelForm):
+    
+    class Meta:
+        model = Profile
+        fields = ('bio', 'profile_pic', 'website',
+                'facebook', 'linkedin', 'twitter')
+        widgets = {
+            'bio': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter your name'}),
+            #'profile_pic': forms.TextInput(attrs={'class': 'form-control'}),
+            #'author': forms.Select(attrs={'class': 'form-control'}),
+            'website': forms.TextInput(attrs={'class': 'form-control'}),
+            'linkedin': forms.TextInput(attrs={'class': 'form-control'}),
+            'facebook': forms.TextInput(attrs={'class': 'form-control'}),
+            'twitter': forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
@@ -53,3 +70,4 @@ class PasswordChangingForm(PasswordChangeForm):
     class Meta:
         model = User
         fields = ('old_password', 'new_password1', 'new_password2')
+
