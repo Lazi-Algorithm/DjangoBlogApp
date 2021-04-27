@@ -8,6 +8,7 @@ from django.views.generic import DetailView, CreateView
 from theblog.models import Profile
 
 
+#User Profile Views
 class ShowProfilePageView(DetailView):
     model = Profile
     template_name ='registration/user_profile.html'
